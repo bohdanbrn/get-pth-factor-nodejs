@@ -14,8 +14,16 @@
   "jest": {
     "testEnvironment": "node"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bohdanbrn/get-pth-factor-nodejs.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bohdanbrn/get-pth-factor-nodejs/issues"
+  },
+  "homepage": "https://github.com/bohdanbrn/get-pth-factor-nodejs#readme",
   "dependencies": {
     "express": "^4.16.4"
   },

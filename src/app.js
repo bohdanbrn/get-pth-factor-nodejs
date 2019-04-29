@@ -7,9 +7,13 @@ app.use(express.json());
 
 app.get("/pth-factor", (req, res) => {
     try {
-        let n = Number(req.query.n);
-        let p = Number(req.query.p);
+        let n = req.query.n;
+        let p = req.query.p;
         let pth = pthFactor(n, p);
+
+        if (pth.error) {
+            return res.status(400).send({ error: pth.error });
+        }
 
         res.send({ pth });
     } catch (err) {

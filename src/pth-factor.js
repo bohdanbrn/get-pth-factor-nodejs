@@ -6,25 +6,30 @@
  * @return {number}
  */
 const pthFactor = (n, p) => {
-    if (!Number.isInteger(n) || !Number.isInteger(p)) {
-        throw new Error(
-            `Function parameters should be number. n = ${typeof n}, p = ${typeof p}`
-        );
+    numbN = Number(n);
+    numbP = Number(p);
+
+    if (isNaN(numbN) || isNaN(numbP)) {
+        return {
+            error: `Function parameters should be number, but n = ${n}, p = ${p}`
+        };
     }
 
     // TODO (maybe restore)
-    // if (!checkNumberRange(n, 1, 1015) || !checkNumberRange(p, 1, 109)) {
-    //     throw new Error(`Function's parameters are wrong. \n n = ${n} (should be 1 <= n <= 1015), \n p = ${p} (should be 1 <= p <= 109)`);
+    // if (!checkNumberRange(numbN, 1, 1015) || !checkNumberRange(numbP, 1, 109)) {
+    //     return {
+    //         error: `Function's parameters are wrong. n = ${numbN} (should be 1 <= n <= 1015), p = ${numbP} (should be 1 <= p <= 109)`
+    //     };
     // }
 
     // find factors for 'n'
-    let factors = findNumberDivisors(n);
+    let factors = findNumberDivisors(numbN);
 
     // reduce 'p' by one, because the indexes in the array start from 0
-    p--;
+    numbP--;
 
-    if (p < factors.length) {
-        return factors[p];
+    if (numbP < factors.length) {
+        return factors[numbP];
     } else {
         return 0;
     }
@@ -40,6 +45,7 @@ const findNumberDivisors = n => {
     let divisors = [];
     let i = 1;
 
+    // find divisors of n, from n to sqrt(n)
     while (i <= Math.sqrt(n)) {
         if (n % i === 0) {
             divisors.push(i);
@@ -47,9 +53,12 @@ const findNumberDivisors = n => {
         i++;
     }
 
+    // find divisors of n, from sqrt(n) to n
     for (let j = i - 1; j > 0; j--) {
-        if (j != n / j && n % j === 0) {
-            divisors.push(n / j);
+        let nj = n / j;
+
+        if (j != nj && n % j === 0) {
+            divisors.push(nj);
         }
     }
 
